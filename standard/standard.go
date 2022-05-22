@@ -7,11 +7,11 @@ import (
 )
 
 func Solve() {
-
+	//do something
 }
 
 func main() {
-	T := 0
+	T := 0 // 如果是单组样例，请讲 T := 0 改为 T := 1
 	in, out = bufio.NewReader(os.Stdin), bufio.NewWriter(os.Stdout)
 	if T == 0 {
 		scan(&T)
