@@ -33,6 +33,12 @@ func ri() (x int) {
 	return x
 }
 
+//rs() 将直接读入并返回一个 string
+func rs() (s string) {
+	scan(&s)
+	return s
+}
+
 //scan() 用法与 fmt.scan() 相似，可以传入多个变量的地址进行读入操作
 func scan(a ...interface{}) { Fscan(in, a...) }
 
