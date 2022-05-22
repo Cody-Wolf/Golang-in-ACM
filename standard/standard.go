@@ -25,16 +25,24 @@ func main() {
 var in *bufio.Reader
 var out *bufio.Writer
 
-//IO区
+//===================================IO区===================================
+
+//ri() 将直接读入并返回一个 int
 func ri() (x int) {
 	scan(&x)
 	return x
 }
-func scan(a ...interface{})    { Fscan(in, a...) }
-func print(a ...interface{})   { Fprint(out, a...) }
+
+func scan(a ...interface{}) { Fscan(in, a...) }
+
+func print(a ...interface{}) { Fprint(out, a...) }
+
 func println(a ...interface{}) { Fprintln(out, a...) }
 
-//基础区
+//===================================IO区===================================
+
+//===================================基础区===================================
+
 func min(a ...int) int {
 	ans := a[0]
 	for i := 1; i < len(a); i++ {
@@ -54,3 +62,5 @@ func max(a ...int) int {
 	}
 	return ans
 }
+
+//===================================基础区===================================
