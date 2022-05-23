@@ -1,4 +1,4 @@
-package standard
+package main
 
 import (
 	"bufio"
@@ -64,6 +64,16 @@ func max(a ...int) int {
 		if a[i] > ans {
 			ans = a[i]
 		}
+	}
+	return ans
+}
+
+//max 可以传入多个 int 变量，求出这些变量的和。
+//你可以使用 ... 运算符打散数组，使得 max 函数可以求出数组的和。
+func sum(a ...int) int {
+	ans := 0
+	for _, x := range a {
+		ans += x
 	}
 	return ans
 }
