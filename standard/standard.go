@@ -131,3 +131,7 @@ func reverse64(a []int64) {
 		a[l], a[r] = a[r], a[l]
 	}
 }
+
+func lowerBound(a []int, k int) int {}
+
+func upperBound(a []int, k int) int {}
