@@ -120,16 +120,14 @@ func sum64(a ...int64) int64 {
 
 //reverse 用于翻转 int 切片，所有元素将会变成原切片的倒序
 func reverse(a []int) {
-	l, r := 0, len(a)-1
-	for l < r {
+	for l, r := 0, len(a)-1; l < r; l, r = l+1, r-1 {
 		a[l], a[r] = a[r], a[l]
 	}
 }
 
 //reverse64 用于翻转 int64 切片，所有元素将会变成原切片的倒序
 func reverse64(a []int64) {
-	l, r := 0, len(a)-1
-	for l < r {
+	for l, r := 0, len(a)-1; l < r; l, r = l+1, r-1 {
 		a[l], a[r] = a[r], a[l]
 	}
 }
