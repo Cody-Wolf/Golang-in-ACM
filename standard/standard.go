@@ -199,3 +199,22 @@ func upperBound64(a []int64, k int64) int {
 	}
 	return pos
 }
+
+type Stack struct {
+	s []int
+}
+
+func (st *Stack) top() int   { return st.s[len(st.s)-1] }
+func (st *Stack) size() int  { return len(st.s) }
+func (st *Stack) pop()       { st.s = st.s[:len(st.s)-1] }
+func (st *Stack) push(x int) { st.s = append(st.s, x) }
+
+type Queue struct {
+	que chan int
+}
+
+func MakeQueue(size int) Queue {
+	var q Queue
+	q.que = make(chan int, size)
+	return q
+}
