@@ -11,7 +11,7 @@ func Solve() {
 }
 
 func main() {
-	T := 0 // 如果是单组样例，请讲 T := 0 改为 T := 1
+	T := 1 // 如果是多组样例，请讲 T := 1 改为 T := 0
 	in, out = bufio.NewReader(os.Stdin), bufio.NewWriter(os.Stdout)
 	if T == 0 {
 		scan(&T)
@@ -132,6 +132,70 @@ func reverse64(a []int64) {
 	}
 }
 
-func lowerBound(a []int, k int) int {}
+//lowerBound 类似于 C++ 中的 lower_bound。
+//用于二分查找 int 切片中，第一个大于等于 k 的元素在切片中的位置。
+//如果元素不存在，则返回切片的长度。
+//注意，lowerBound 作用的 int 切片必须升序。
+func lowerBound(a []int, k int) int {
+	l, r, pos := 0, len(a)-1, len(a)
+	for l <= r {
+		mid := (l + r) >> 1
+		if a[mid] < k {
+			l = mid + 1
+		} else {
+			pos, r = mid, mid-1
+		}
+	}
+	return pos
+}
 
-func upperBound(a []int, k int) int {}
+//lowerBound64 类似于 C++ 中的 lower_bound。
+//用于二分查找 int64 切片中，第一个大于等于 k 的元素在切片中的位置。
+//如果元素不存在，则返回切片的长度。
+//注意，lowerBound 作用的 int64 切片必须升序。
+func lowerBound64(a []int64, k int64) int {
+	l, r, pos := 0, len(a)-1, len(a)
+	for l <= r {
+		mid := (l + r) >> 1
+		if a[mid] < k {
+			l = mid + 1
+		} else {
+			pos, r = mid, mid-1
+		}
+	}
+	return pos
+}
+
+//upperBound 类似于 C++ 中的 upper_bound。
+//用于二分查找 int 切片中，第一个大于 k 的元素在切片中的位置。
+//如果元素不存在，则返回切片的长度。
+//注意，upperBound 作用的 int 切片必须升序。
+func upperBound(a []int, k int) int {
+	l, r, pos := 0, len(a)-1, len(a)
+	for l <= r {
+		mid := (l + r) >> 1
+		if a[mid] <= k {
+			l = mid + 1
+		} else {
+			pos, r = mid, mid-1
+		}
+	}
+	return pos
+}
+
+//upperBound64 类似于 C++ 中的 upper_bound。
+//用于二分查找 int64 切片中，第一个大于 k 的元素在切片中的位置。
+//如果元素不存在，则返回切片的长度。
+//注意，upperBound 作用的 int64 切片必须升序。
+func upperBound64(a []int64, k int64) int {
+	l, r, pos := 0, len(a)-1, len(a)
+	for l <= r {
+		mid := (l + r) >> 1
+		if a[mid] <= k {
+			l = mid + 1
+		} else {
+			pos, r = mid, mid-1
+		}
+	}
+	return pos
+}

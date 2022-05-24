@@ -23,5 +23,7 @@
 - max 最大值
 - sum 求和
 - reverse 翻转切片
+- lowerBound 二分查找（第一个大于等于 k 元素的位置）
+- upperBound 二分查找（第一个大于 k 元素的位置）
 
 
