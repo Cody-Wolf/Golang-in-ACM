@@ -77,6 +77,3 @@ func sum(a ...int) int {
 	}
 	return ans
 }
-
-//pair 是一个数对，实际上就是 struct{x, y int}
-type pair struct{ x, y int }
