@@ -200,6 +200,23 @@ func upperBound64(a []int64, k int64) int {
 	return pos
 }
 
+func unique(a []int) []int {
+	var b []int
+	b = append(b, a[0])
+	for i := 1; i < len(a); i++ {
+		if a[i] != a[i-1] {
+			b = append(b, a[i])
+		}
+	}
+	return b
+}
+
+func valSet(a []int, k int) {
+	for i, _ := range a {
+		a[i] = k
+	}
+}
+
 type Stack struct {
 	s []int
 }
@@ -217,4 +234,7 @@ func MakeQueue(size int) Queue {
 	var q Queue
 	q.que = make(chan int, size)
 	return q
+}
+
+type PriorityQueue struct {
 }
