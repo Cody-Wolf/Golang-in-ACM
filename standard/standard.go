@@ -228,13 +228,11 @@ func valSet(a []int, k int) {
 }
 
 //Stack 类型是一个 int 类型的栈
-//
-//如果有必要，可以直接通过成员 s（int 切片）遍历栈（s[0] 为栈底）
 type Stack struct {
 	s []int
 }
 
-//top 获取栈的第一个元素
+//top 获取栈顶元素
 func (st *Stack) top() int { return st.s[len(st.s)-1] }
 
 //size 返回栈内的元素个数
@@ -249,13 +247,102 @@ func (st *Stack) pop() { st.s = st.s[:len(st.s)-1] }
 //push 将一个 int 类型从栈顶添加入栈
 func (st *Stack) push(x int) { st.s = append(st.s, x) }
 
+//get 得到栈的内容（一个新的 int切片）
+func (st *Stack) get() (ans []int) {
+	copy(ans, st.s)
+	return ans
+}
+
 //Queue 类型是一个 int 类型的队列
-//
-//
 type Queue struct {
-	que  []int
+	q    []int
 	head int
 }
 
+//front 获取队首元素
+func (que *Queue) front() int { return que.q[que.head] }
+
+//size 返回队列的元素个数
+func (que *Queue) size() int { return len(que.q) - que.head }
+
+//empty 返回一个 bool 类型，表示队列是否为空
+func (que *Queue) empty() bool { return que.size() == 0 }
+
+//pop 弹出队首元素
+func (que *Queue) pop() { que.head++ }
+
+//push 将一个 int 类型从队尾添加入队
+func (que *Queue) push(x int) { que.q = append(que.q, x) }
+
+//get 得到队列的内容（一个新的 int切片）
+func (que *Queue) get() (ans []int) {
+	copy(ans, que.q)
+	return ans
+}
+
 type PriorityQueue struct {
+	heap []int
+	cmp  func(int, int) bool
+}
+
+func (pq *PriorityQueue) heapifyUp(x int) {
+	for x > 1 && pq.cmp(pq.heap[x-1], pq.heap[x/2-1]) {
+		pq.heap[x-1], pq.heap[x/2-1] = pq.heap[x/2-1], pq.heap[x-1]
+		x >>= 1
+	}
+}
+
+func (pq *PriorityQueue) heapifyDown(x int) {
+	for (x << 1) <= len(pq.heap) {
+		t := x << 1
+		if t+1 <= len(pq.heap) && pq.cmp(pq.heap[t+1-1], pq.heap[t-1]) {
+			t++
+		}
+		if !pq.cmp(pq.heap[t-1], pq.heap[x-1]) {
+			break
+		}
+		pq.heap[x-1], pq.heap[t-1] = pq.heap[t-1], pq.heap[x-1]
+		x = t
+	}
+}
+
+func (pq *PriorityQueue) push(x int) {
+	pq.heap = append(pq.heap, x)
+	pq.heapifyUp(len(pq.heap))
+}
+
+func (pq *PriorityQueue) size() int { return len(pq.heap) }
+
+func (pq *PriorityQueue) top() int { return pq.heap[1-1] }
+
+func (pq *PriorityQueue) pop() {
+	pq.heap[1-1], pq.heap[len(pq.heap)-1] = pq.heap[len(pq.heap)-1], pq.heap[1-1]
+	pq.heap = pq.heap[:len(pq.heap)-1]
+	pq.heapifyDown(1)
+}
+
+func newPriorityQueue(a []int, fun func(int, int) bool) *PriorityQueue {
+	var q PriorityQueue
+	copy(q.heap, a)
+	q.cmp = fun
+	for i := len(a); i >= 1; i-- {
+		q.heapifyDown(i)
+	}
+	return &q
+}
+
+func less(a, b int) bool {
+	if a > b {
+		return true
+	} else {
+		return false
+	}
+}
+
+func greater(a, b int) bool {
+	if a < b {
+		return true
+	} else {
+		return false
+	}
 }
