@@ -11,6 +11,8 @@ func Solve() {
 	//do something
 }
 
+//-------------------------------------------------------
+
 func main() {
 	T := 1 // 如果是多组样例，请讲 T := 1 改为 T := 0
 	in, out = bufio.NewReader(os.Stdin), bufio.NewWriter(os.Stdout)
