@@ -280,11 +280,17 @@ func (que *Queue) get() (ans []int) {
 	return ans
 }
 
+//PriorityQueue 类似是一个 int 型的优先队列
+//
+//注意：你需要通过 newPriorityQueue 函数来获取一个优先队列实例，而不是直接创建
 type PriorityQueue struct {
 	heap []int
 	cmp  func(int, int) bool
 }
 
+//heapifyUp 从 x 结点开始到堆顶，调整结点使得满足堆的性质
+//
+//注意：你不应该直接使用这个函数
 func (pq *PriorityQueue) heapifyUp(x int) {
 	for x > 1 && pq.cmp(pq.heap[x-1], pq.heap[x/2-1]) {
 		pq.heap[x-1], pq.heap[x/2-1] = pq.heap[x/2-1], pq.heap[x-1]
@@ -292,6 +298,9 @@ func (pq *PriorityQueue) heapifyUp(x int) {
 	}
 }
 
+//heapifyDown 从 x 结点开始向子节点，调整结点使得满足堆的性质
+//
+//注意：你不应该直接使用这个函数
 func (pq *PriorityQueue) heapifyDown(x int) {
 	for (x << 1) <= len(pq.heap) {
 		t := x << 1
@@ -306,21 +315,33 @@ func (pq *PriorityQueue) heapifyDown(x int) {
 	}
 }
 
+//push 向优先队列中加入一个元素（并自动调整优先队列）
 func (pq *PriorityQueue) push(x int) {
 	pq.heap = append(pq.heap, x)
 	pq.heapifyUp(len(pq.heap))
 }
 
+//size 返回优先队列内的元素个数
 func (pq *PriorityQueue) size() int { return len(pq.heap) }
 
+//top 返回优先队列中优先级最高的元素
 func (pq *PriorityQueue) top() int { return pq.heap[1-1] }
 
+//pop 弹出优先队列中优先级最高的元素
 func (pq *PriorityQueue) pop() {
 	pq.heap[1-1], pq.heap[len(pq.heap)-1] = pq.heap[len(pq.heap)-1], pq.heap[1-1]
 	pq.heap = pq.heap[:len(pq.heap)-1]
 	pq.heapifyDown(1)
 }
 
+//newPriorityQueue 返回一个指向优先队列的指针
+//
+//第一个形参：传入一个 int 类型切片，创建优先队列时，你可以用一个 int 类型切片作为初始来创建，也可以设为空切片（nil)
+//
+//第二个形参：传入一个 func(int, int) bool 类型的函数指针作为比较器，以规定优先队列的优先级。
+//传入比较器的两个元素如果满足前者比后者大，则返回 true；否则返回 false。
+//
+//你可以使用已有的 greater 函数指定小的 int 优先，也可以使用已有的 less 函数指定大的 int 优先
 func newPriorityQueue(a []int, fun func(int, int) bool) *PriorityQueue {
 	var q PriorityQueue
 	copy(q.heap, a)
@@ -331,6 +352,7 @@ func newPriorityQueue(a []int, fun func(int, int) bool) *PriorityQueue {
 	return &q
 }
 
+//less 判断传入参数 a 和 b 是否满足 a > b
 func less(a, b int) bool {
 	if a > b {
 		return true
@@ -339,6 +361,7 @@ func less(a, b int) bool {
 	}
 }
 
+//greater 判断传入参数 a 和 b 是否满足 a < b
 func greater(a, b int) bool {
 	if a < b {
 		return true
