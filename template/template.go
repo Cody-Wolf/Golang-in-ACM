@@ -40,6 +40,22 @@ func ri64() (x int64) {
 	return x
 }
 
+//rl 将直接读入一行整数，并返回一个 int 切片
+func rl(n int) (a []int) {
+	for i := 0; i < n; i++ {
+		a = append(a, ri())
+	}
+	return a
+}
+
+//rl64 将直接读入一行整数，并返回一个 int64 切片
+func rl64(n int) (a []int64) {
+	for i := 0; i < n; i++ {
+		a = append(a, ri64())
+	}
+	return a
+}
+
 //rs 将直接读入并返回一个 string
 func rs() (s string) {
 	scan(&s)
